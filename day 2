@@ -1,0 +1,93 @@
+1.rotate array
+int maxProfit(int* prices, int pricesSize){
+    int maxProfit=0;
+    int minprice=prices[0];
+    for(int i =0;i<pricesSize;i++){
+        if(prices[i]<=minprice){
+            minprice=prices[i];
+        }
+        if(prices[i]-minprice>maxProfit){
+            maxProfit=prices[i]-minprice;
+        }
+
+    }
+    return maxProfit;
+
+}
+2.power of 2
+ class Solution {
+    public boolean isPowerOfTwo(int n) {
+        return n>0 && (n&n-1)==0;
+        
+    }
+}
+3 find the duplicate number
+class Solution {
+    public int findDuplicate(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            int cur=nums[i];
+            if(cur<0){
+                cur=-cur;
+            }
+            if (nums[cur]<0){
+                return cur;
+            }
+            else{
+                nums[cur] *=-1;
+            }
+        }
+        return 0;
+        
+    }
+}
+4
+most consecutive one
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int count=0;
+        int max=0;
+        for(int i : nums){
+            if(i==1){
+                count++;
+            }else{
+                if(max<count){
+                    max=count;
+                }
+                count=0;
+            }
+        }
+        return Math.max(count,max);
+        
+    }
+    5.3sum closets
+    
+int cmp(const void *a, const void *b){
+    return *(int *)a - *(int *)b;    
+}
+
+int threeSumClosest(int* nums, int numsSize, int target){
+    if(numsSize<=2)
+        return 0;
+    qsort(nums, numsSize, sizeof(int), cmp);
+    
+    int min = nums[0] + nums[1] + nums[2];
+    for(int i=0;i<numsSize-2;i++){
+        int l=i+1, r=numsSize-1, sum=0;
+        while(l<numsSize && l<r){
+            sum = nums[l] + nums[r] + nums[i];
+
+            if(sum==target)
+              return sum;  
+            if(abs(sum-target) < abs(min-target))
+                min = sum;
+            
+            if(sum<target)
+                l++;
+            else
+                r--;
+        }
+    }
+    return min;
+}
+    
+}
